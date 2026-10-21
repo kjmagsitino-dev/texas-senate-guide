@@ -2670,8 +2670,16 @@ DAILY UPDATE CHECKLIST (search the file for "UPDATE DAILY" or class="asof"):
         completionNudge.innerHTML = '🎉 You\'ve read the whole guide! <button onclick="shareGuide()" style="background:var(--dark);color:#fff;border:none;border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;margin-left:4px;">Share it</button>';
         document.body.appendChild(completionNudge);
       }
+      completionNudge.style.transition = 'opacity .5s ease';
+      completionNudge.style.opacity = '1';
       completionNudge.style.display = 'flex';
+      clearTimeout(window._nudgeTimer);
+      window._nudgeTimer = setTimeout(function(){
+        completionNudge.style.opacity = '0';
+        setTimeout(function(){ completionNudge.style.display = 'none'; }, 500);
+      }, 6000);
     } else {
+      clearTimeout(window._nudgeTimer);
       if (completionNudge) completionNudge.style.display = 'none';
     }
 
